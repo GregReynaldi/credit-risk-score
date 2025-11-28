@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Credit Risk Studio</title>
+    <link rel="stylesheet" href="/static/css/style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.6/dist/chart.umd.min.js"></script>
+    <script>
+      // Ensure Chart.js is loaded before app.js runs
+      window.addEventListener('DOMContentLoaded', function() {
+        if (typeof Chart === 'undefined') {
+          console.error('Chart.js failed to load from CDN. Trying fallback...');
+          // Fallback: try alternative CDN
+          const script = document.createElement('script');
+          script.src = 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.6/chart.umd.min.js';
+          script.onerror = function() {
+            console.error('Chart.js failed to load from all sources. Charts will not work.');
+          };
+          document.head.appendChild(script);
+        }
+      });
+      
+      // Calculate loan_percent_income - INLINE FUNCTION THAT ALWAYS WORKS
+      function updateLoanPercent() {
+        const loanAmnt = parseFloat(document.getElementById('loan_amnt').value) || 0;
+        const personIncome = parseFloat(document.getElementById('person_income').value) || 0;
+        const field = document.getElementById('loan_percent_income');
+        
+        if (personIncome > 0 && field) {
+          const result = (loanAmnt / personIncome).toFixed(4);
+          field.value = result;
+        }
+      }
+    </script>
+    <script defer src="/static/js/app.js"></script>
+  </head>
+  <body>
+    <header class="hero">
+      <div>
+        <p class="eyebrow">Realtime scoring · Fast LIME · LLM insights</p>
+        <h1>Credit Risk Decision Studio</h1>
+        <p class="subhead">
+          Enter an applicant profile and get an ensemble prediction, LIME feature drivers, and an analyst-grade summary instantly.
+        </p>
+      </div>
+      <div class="hero-badge">
+        <span class="hero-value" id="heroRiskLevel">--</span>
+        <span class="hero-label">Risk level</span>
+      </div>
+    </header>
+
+    <main class="layout">
+      <section class="panel">
+        <div class="panel-header">
+          <h2>Applicant profile</h2>
+          <button id="resetBtn" type="button">Reset</button>
+        </div>
+        <form id="creditForm" class="form-grid">
+          <label>
+            <span>Age</span>
+            <input type="number" name="person_age" min="18" max="100" value="34" required />
+          </label>
+          <label>
+            <span>Annual income (USD)</span>
+            <input type="number" name="person_income" id="person_income" min="1000" value="92000" required oninput="updateLoanPercent()" onchange="updateLoanPercent()" />
+          </label>
+          <label>
+            <span>Employment length (years)</span>
+            <input type="number" name="person_emp_length" min="0" max="60" value="5" step="0.1" required />
+          </label>
+          <label>
+            <span>Home ownership</span>
+            <select name="person_home_ownership" required>
+              <option value="RENT">Rent</option>
+              <option value="OWN">Own</option>
+              <option value="MORTGAGE">Mortgage</option>
+              <option value="OTHER">Other</option>
+            </select>
+          </label>
+          <label>
+            <span>Loan intent</span>
+            <select name="loan_intent">
+              <option value="VENTURE">Venture</option>
+              <option value="PERSONAL">Personal</option>
+              <option value="EDUCATION">Education</option>
+              <option value="MEDICAL">Medical</option>
+              <option value="HOMEIMPROVEMENT">Home Improvement</option>
+              <option value="DEBTCONSOLIDATION">Debt Consolidation</option>
+              <option value="OTHER">Other</option>
+            </select>
+          </label>
+          <label>
+            <span>Loan grade</span>
+            <select name="loan_grade">
+              <option value="A">A</option>
+              <option value="B" selected>B</option>
+              <option value="C">C</option>
+              <option value="D">D</option>
+              <option value="E">E</option>
+              <option value="F">F</option>
+              <option value="G">G</option>
+            </select>
+          </label>
+          <label>
+            <span>Loan amount (USD)</span>
+            <input type="number" name="loan_amnt" id="loan_amnt" value="22000" min="500" required oninput="updateLoanPercent()" onchange="updateLoanPercent()" />
+          </label>
+          <label>
+            <span>Interest rate (%)</span>
+            <input type="number" name="loan_int_rate" value="13.5" step="0.01" min="0" required />
+          </label>
+          <label>
+            <span>Loan % income</span>
+            <input type="text" name="loan_percent_income" id="loan_percent_income" readonly value="0.24" style="background-color: #f5f5f5; cursor: not-allowed; color: #000;" />
+            <small style="display: block; margin-top: 4px; color: #666; font-size: 0.85em;">Calculated: loan amount ÷ annual income</small>
+          </label>
+          <label>
+            <span>Default on file</span>
+            <select name="cb_person_default_on_file">
+              <option value="N" selected>No</option>
+              <option value="Y">Yes</option>
+            </select>
+          </label>
+          <label>
+            <span>Credit history length</span>
+            <input type="number" name="cb_person_cred_hist_length" value="6" min="0" max="50" required />
+          </label>
+          <div class="form-actions">
+            <button class="primary" type="submit" id="submitBtn">Run analysis</button>
+          </div>
+        </form>
+      </section>
+
+      <section class="panel results-panel">
+        <div class="panel-header">
+          <h2>Decision intelligence</h2>
+          <span id="latencyTag">-- ms</span>
+        </div>
+        <div class="metrics">
+          <div class="metric">
+            <span class="label">Default probability</span>
+            <span class="value" id="probabilityValue">--%</span>
+          </div>
+          <div class="metric">
+            <span class="label">Risk tier</span>
+            <span class="badge" id="riskBadge">--</span>
+          </div>
+        </div>
+        <article class="narrative" id="llmSummary">
+          Submit the form to generate an analyst summary.
+        </article>
+        <div class="tabs">
+          <button class="tab-btn active" data-tab="local">Local Explanations</button>
+          <button class="tab-btn" data-tab="global">Global Context</button>
+          <button class="tab-btn" data-tab="comparison">Comparison</button>
+        </div>
+
+        <div class="tab-content active" id="tab-local">
+          <div class="chart-card">
+            <div class="chart-header">
+              <h3>LIME Feature Contributions</h3>
+              <span class="chart-note">Local impact on default probability</span>
+            </div>
+            <canvas id="limeChart" height="220"></canvas>
+            <ul class="feature-list" id="featureList"></ul>
+          </div>
+
+          <div class="chart-card">
+            <div class="chart-header">
+              <h3>SHAP Feature Contributions</h3>
+              <span class="chart-note">Local marginal contributions</span>
+            </div>
+            <canvas id="shapChart" height="220"></canvas>
+            <ul class="feature-list" id="shapFeatureList"></ul>
+          </div>
+
+          <div class="risk-drivers-card">
+            <h3>Risk Drivers</h3>
+            <div class="drivers-grid">
+              <div class="driver-section">
+                <h4 class="driver-title increasing">Risk Increasing</h4>
+                <ul class="driver-list" id="riskIncreasingList"></ul>
+              </div>
+              <div class="driver-section">
+                <h4 class="driver-title decreasing">Risk Decreasing</h4>
+                <ul class="driver-list" id="riskDecreasingList"></ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="tab-content" id="tab-global">
+          <div class="chart-card">
+            <div class="chart-header">
+              <h3>Global Feature Importance</h3>
+              <span class="chart-note">Pre-computed from training data</span>
+            </div>
+            <canvas id="globalChart" height="220"></canvas>
+          </div>
+
+          <div class="context-card">
+            <h3>Feature Context</h3>
+            <div class="context-table" id="globalContextTable"></div>
+          </div>
+        </div>
+
+        <div class="tab-content" id="tab-comparison">
+          <div class="chart-card">
+            <div class="chart-header">
+              <h3>Local vs Global Comparison</h3>
+              <span class="chart-note">How this case differs from typical patterns</span>
+            </div>
+            <canvas id="comparisonChart" height="300"></canvas>
+          </div>
+
+          <div class="agreement-card">
+            <h3>Model Agreement</h3>
+            <div class="agreement-table" id="modelAgreementTable"></div>
+          </div>
+        </div>
+
+        <div class="risk-gauge-card">
+          <h3>Risk Probability Distribution</h3>
+          <canvas id="riskGaugeChart" height="200"></canvas>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
+
