@@ -150,7 +150,7 @@ If you're new to Python or just want the easiest path, go with **Option A (venv)
 **Step 1: Get the Project Files**
 If you have the project in a repository, download it:
 ```bash
-git clone <repository-url>
+git clone https://github.com/GregReynaldi/credit-risk-score.git
 cd "FINAL PROJECT"
 ```
 
