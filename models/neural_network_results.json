@@ -1,0 +1,249 @@
+{
+  "tabnet_pure": {
+    "train_metrics": {
+      "roc_auc": 0.9269856302240106,
+      "pr_auc": 0.8660158643735137,
+      "f1": 0.7920772369861651,
+      "precision": 0.9124054116028434,
+      "recall": 0.699788955328878
+    },
+    "test_metrics": {
+      "roc_auc": 0.9218458293823817,
+      "pr_auc": 0.8607874110444367,
+      "f1": 0.7945751894694855,
+      "precision": 0.9179723502304148,
+      "recall": 0.70042194092827,
+      "threshold": 0.7670380473136902
+    },
+    "train_confusion": [
+      [
+        19996,
+        382
+      ],
+      [
+        1707,
+        3979
+      ]
+    ],
+    "test_confusion": [
+      [
+        5006,
+        89
+      ],
+      [
+        426,
+        996
+      ]
+    ],
+    "train_specificity": 0.9812542938462566,
+    "test_specificity": 0.982531894013546,
+    "optimal_threshold": 0.7670380473136902
+  },
+  "tabnet_tokenizer": {
+    "train_metrics": {
+      "roc_auc": 0.9209828153974995,
+      "pr_auc": 0.8546764362474086,
+      "f1": 0.7765170202269364,
+      "precision": 0.8844684198696336,
+      "recall": 0.6920506507210693
+    },
+    "test_metrics": {
+      "roc_auc": 0.9197363317777971,
+      "pr_auc": 0.8462129348385825,
+      "f1": 0.7746755800235942,
+      "precision": 0.8786797502230151,
+      "recall": 0.6926863572433193,
+      "threshold": 0.7064861059188843
+    },
+    "train_confusion": [
+      [
+        19864,
+        514
+      ],
+      [
+        1751,
+        3935
+      ]
+    ],
+    "test_confusion": [
+      [
+        4959,
+        136
+      ],
+      [
+        437,
+        985
+      ]
+    ],
+    "train_specificity": 0.9747767199921006,
+    "test_specificity": 0.9733071638859718,
+    "optimal_threshold": 0.7064861059188843
+  },
+  "dcn": {
+    "train_metrics": {
+      "roc_auc": 0.922462905362307,
+      "pr_auc": 0.8616462114603528,
+      "f1": 0.7925089179548157,
+      "precision": 0.9076259645937358,
+      "recall": 0.7033063665142455
+    },
+    "test_metrics": {
+      "roc_auc": 0.9251468235729301,
+      "pr_auc": 0.8652762270649078,
+      "f1": 0.7933491686460807,
+      "precision": 0.907608695652174,
+      "recall": 0.7046413502109705,
+      "threshold": 0.30759933590888977
+    },
+    "train_confusion": [
+      [
+        19971,
+        407
+      ],
+      [
+        1687,
+        3999
+      ]
+    ],
+    "test_confusion": [
+      [
+        4993,
+        102
+      ],
+      [
+        420,
+        1002
+      ]
+    ],
+    "train_specificity": 0.9800274806163028,
+    "test_specificity": 0.9799803729144297,
+    "optimal_threshold": 0.30759933590888977
+  },
+  "residual": {
+    "train_metrics": {
+      "roc_auc": 0.936880217667305,
+      "pr_auc": 0.8845782675042817,
+      "f1": 0.8179910044977511,
+      "precision": 0.947441537392915,
+      "recall": 0.7196623285262047
+    },
+    "test_metrics": {
+      "roc_auc": 0.9306025183952168,
+      "pr_auc": 0.8763622446686953,
+      "f1": 0.8093539437177962,
+      "precision": 0.927338782924614,
+      "recall": 0.7180028129395218,
+      "threshold": 0.35199782252311707
+    },
+    "train_confusion": [
+      [
+        20151,
+        227
+      ],
+      [
+        1594,
+        4092
+      ]
+    ],
+    "test_confusion": [
+      [
+        5015,
+        80
+      ],
+      [
+        401,
+        1021
+      ]
+    ],
+    "train_specificity": 0.9888605358719703,
+    "test_specificity": 0.9842983316975497,
+    "optimal_threshold": 0.35199782252311707
+  },
+  "ensemble": {
+    "train_metrics": {
+      "roc_auc": 0.9483531954812399,
+      "pr_auc": 0.9040156698582,
+      "f1": 0.8353057199211046,
+      "precision": 0.9508307139649753,
+      "recall": 0.7448118185015828
+    },
+    "test_metrics": {
+      "roc_auc": 0.9539221044873148,
+      "pr_auc": 0.913678543684576,
+      "f1": 0.8396825396825397,
+      "precision": 0.9635701275045537,
+      "recall": 0.7440225035161744,
+      "threshold": 0.36201444268226624
+    },
+    "train_confusion": [
+      [
+        20159,
+        219
+      ],
+      [
+        1451,
+        4235
+      ]
+    ],
+    "test_confusion": [
+      [
+        5055,
+        40
+      ],
+      [
+        364,
+        1058
+      ]
+    ],
+    "train_specificity": 0.9892531161055556,
+    "test_specificity": 0.9921491658486766,
+    "optimal_threshold": 0.36201444268226624
+  },
+  "comparison": [
+    {
+      "Model": "Multi-Scale Ensemble",
+      "Test ROC-AUC": 0.9539221045,
+      "Test PR-AUC": 0.9136785437,
+      "Test F1": 0.8396825397,
+      "Test Precision": 0.9635701275,
+      "Test Recall": 0.7440225035,
+      "Optimal Threshold": 0.3620144427
+    },
+    {
+      "Model": "Residual Neural Network",
+      "Test ROC-AUC": 0.9306025184,
+      "Test PR-AUC": 0.8763622447,
+      "Test F1": 0.8093539437,
+      "Test Precision": 0.9273387829,
+      "Test Recall": 0.7180028129,
+      "Optimal Threshold": 0.3519978225
+    },
+    {
+      "Model": "Deep & Cross Network",
+      "Test ROC-AUC": 0.9251468236,
+      "Test PR-AUC": 0.8652762271,
+      "Test F1": 0.7933491686,
+      "Test Precision": 0.9076086957,
+      "Test Recall": 0.7046413502,
+      "Optimal Threshold": 0.3075993359
+    },
+    {
+      "Model": "Pure TabNet",
+      "Test ROC-AUC": 0.9218458294,
+      "Test PR-AUC": 0.860787411,
+      "Test F1": 0.7945751895,
+      "Test Precision": 0.9179723502,
+      "Test Recall": 0.7004219409,
+      "Optimal Threshold": 0.7670380473
+    },
+    {
+      "Model": "TabNet + Tokenizer",
+      "Test ROC-AUC": 0.9197363318,
+      "Test PR-AUC": 0.8462129348,
+      "Test F1": 0.77467558,
+      "Test Precision": 0.8786797502,
+      "Test Recall": 0.6926863572,
+      "Optimal Threshold": 0.7064861059
+    }
+  ]
+}

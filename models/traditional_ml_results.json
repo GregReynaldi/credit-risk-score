@@ -1,0 +1,175 @@
+{
+  "logistic_regression": {
+    "best_params": {
+      "C": 0.1,
+      "penalty": "l1"
+    },
+    "cv_auc": 0.8636044010530138,
+    "oof_auc": 0.8635231341849388,
+    "train_metrics": {
+      "roc_auc": 0.8635231341849388,
+      "pr_auc": 0.698055085160971,
+      "f1": 0.6430200152014188,
+      "precision": 0.6185215272136474,
+      "recall": 0.6695392191347168
+    },
+    "test_metrics": {
+      "roc_auc": 0.8662582521404152,
+      "pr_auc": 0.6955802429190222,
+      "f1": 0.6453587215232914,
+      "precision": 0.6247531270572745,
+      "recall": 0.6673699015471167,
+      "threshold": 0.6401485135035142
+    },
+    "train_confusion": [
+      [
+        18030,
+        2348
+      ],
+      [
+        1879,
+        3807
+      ]
+    ],
+    "test_confusion": [
+      [
+        4525,
+        570
+      ],
+      [
+        473,
+        949
+      ]
+    ],
+    "train_specificity": 0.884777701442689,
+    "test_specificity": 0.8881256133462436,
+    "optimal_threshold": 0.6401485135035142
+  },
+  "random_forest": {
+    "best_params": {
+      "max_depth": null,
+      "min_samples_leaf": 1,
+      "min_samples_split": 2
+    },
+    "cv_auc": 0.9315061292065012,
+    "oof_auc": 0.931470506408824,
+    "train_metrics": {
+      "roc_auc": 0.931470506408824,
+      "pr_auc": 0.8814990077617864,
+      "f1": 0.8225903013370585,
+      "precision": 0.9506457564575646,
+      "recall": 0.7249384453042561
+    },
+    "test_metrics": {
+      "roc_auc": 0.9396444350587776,
+      "pr_auc": 0.8948289407213466,
+      "f1": 0.835583796664019,
+      "precision": 0.9598540145985401,
+      "recall": 0.739803094233474,
+      "threshold": 0.44
+    },
+    "train_confusion": [
+      [
+        20164,
+        214
+      ],
+      [
+        1564,
+        4122
+      ]
+    ],
+    "test_confusion": [
+      [
+        5051,
+        44
+      ],
+      [
+        370,
+        1052
+      ]
+    ],
+    "train_specificity": 0.9894984787515463,
+    "test_specificity": 0.9913640824335639,
+    "optimal_threshold": 0.44
+  },
+  "xgboost": {
+    "best_params": {
+      "gamma": 0.3,
+      "max_depth": 7,
+      "min_child_weight": 5,
+      "reg_lambda": 1.0
+    },
+    "cv_auc": 0.928079403494294,
+    "oof_auc": 0.9278514850541786,
+    "train_metrics": {
+      "roc_auc": 0.9278514850541786,
+      "pr_auc": 0.8756663617571683,
+      "f1": 0.8146336492408031,
+      "precision": 0.9685001211533801,
+      "recall": 0.7029546253957087
+    },
+    "test_metrics": {
+      "roc_auc": 0.9357703631010795,
+      "pr_auc": 0.8867452561612481,
+      "f1": 0.8241042345276873,
+      "precision": 0.9787234042553191,
+      "recall": 0.7116736990154712,
+      "threshold": 0.6793264150619507
+    },
+    "train_confusion": [
+      [
+        20248,
+        130
+      ],
+      [
+        1689,
+        3997
+      ]
+    ],
+    "test_confusion": [
+      [
+        5073,
+        22
+      ],
+      [
+        410,
+        1012
+      ]
+    ],
+    "train_specificity": 0.9936205712041911,
+    "test_specificity": 0.9956820412166838,
+    "optimal_threshold": 0.6793264150619507
+  },
+  "comparison": [
+    {
+      "Model": "Random Forest",
+      "OOF AUC": 0.9314705064,
+      "Test ROC-AUC": 0.9396444351,
+      "Test PR-AUC": 0.8948289407,
+      "Test F1": 0.8355837967,
+      "Test Precision": 0.9598540146,
+      "Test Recall": 0.7398030942,
+      "Optimal Threshold": 0.44
+    },
+    {
+      "Model": "XGBoost",
+      "OOF AUC": 0.9278514851,
+      "Test ROC-AUC": 0.9357703631,
+      "Test PR-AUC": 0.8867452562,
+      "Test F1": 0.8241042345,
+      "Test Precision": 0.9787234043,
+      "Test Recall": 0.711673699,
+      "Optimal Threshold": 0.6793264151
+    },
+    {
+      "Model": "Logistic Regression",
+      "OOF AUC": 0.8635231342,
+      "Test ROC-AUC": 0.8662582521,
+      "Test PR-AUC": 0.6955802429,
+      "Test F1": 0.6453587215,
+      "Test Precision": 0.6247531271,
+      "Test Recall": 0.6673699015,
+      "Optimal Threshold": 0.6401485135
+    }
+  ]
+}
