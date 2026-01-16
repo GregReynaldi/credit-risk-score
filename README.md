@@ -761,6 +761,5 @@ These documents are referenced throughout this README where relevant, but you ca
 
 ## Contact
 
-2023331101 - Gregorius Reynaldi Pratama
-2023331125 - Leonardo Matthew Yauw 
+Gregorius Reynaldi Pratama - https://github.com/GregReynaldi
 
